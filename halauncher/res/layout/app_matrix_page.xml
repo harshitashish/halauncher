@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:orientation="vertical"
+    android:isScrollContainer="false"
+    >
+
+ 
+     <GridView	android:id="@+id/appmatrix"
+    			 	android:layout_width="match_parent"
+    				android:layout_height="wrap_content"
+    				android:numColumns="4"
+    				android:gravity="center" 
+    				android:paddingLeft="10dp"
+    				android:paddingRight="10dp"
+    				android:paddingTop="20dp"
+    				android:paddingBottom="20dp"
+    				android:background="@android:color/white"
+    				
+    				 />   
+ 
+</LinearLayout>

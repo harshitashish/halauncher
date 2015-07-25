@@ -1,0 +1,31 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:id="@+id/home"  
+   android:layout_width="fill_parent"
+   android:layout_height="fill_parent"
+   tools:context="com.ha.halauncher.MainActivity" >
+
+    <com.ha.halauncher.home.HomeMatrixPager 
+    android:id="@+id/homepager"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center"
+    android:nestedScrollingEnabled="false"
+    android:layout_marginBottom="120dp"
+    android:layout_marginTop="100dp"
+   /> 
+    
+    <ImageButton android:id="@+id/launcher_home"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp"
+        android:src="@drawable/ic_launcher"  
+        android:contentDescription="desc"   
+        android:background="@android:color/transparent" 
+        android:clickable="true"
+        />
+
+</FrameLayout>
+
+

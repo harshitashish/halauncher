@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <string name="app_name">haLauncher</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Catch Bean Names -->
+    <string name="c_all_apps_by_names">allapps_by_name</string>
+    <string name="title_activity_all_apps">AllAppsActivity</string>
+    <string name="hello_world">Hello world!</string>
+    
+    
+      <string name="menu_insert_widget_label">Add Widget</string>
+    <string name="group_search">Search</string>
+    
+    <string name="menu_remove_widget_label">Remove Widget</string>
+    <string name="no_widgets_popup">Add widgets first</string>
+    <string name="widget_removed_popup">The widget was removed!</string>
+    <string name="app_help">Touch menu to add/remove widgets.</string>
+
+</resources>
