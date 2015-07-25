@@ -29,6 +29,12 @@ import android.widget.Toast;
 import com.ha.halauncher.home.HomeMatrixPager;
 import com.ha.halauncher.home.HomeMatrixPagerAdapter;
 
+/*
+ *   It is the main activity 
+ * 
+ * 
+ * */
+
 public class MainActivity extends Activity {
 
 	static final String TAG = "com.ha.halauncher.MainActivity";
@@ -102,8 +108,6 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
-		// Ashish test adde more more more moer more moer 
-
 		//getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
