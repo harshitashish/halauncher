@@ -66,13 +66,15 @@ public class MainActivity extends Activity {
 		mAppWidgetHost = new AppWidgetHost(this, R.id.APPWIDGET_HOST_ID);
 
 		ImageButton home = (ImageButton) findViewById(R.id.launcher_home);
+		ImageButton widgetLaunch = (ImageButton) findViewById(R.id.widgetLaunch);
+		
+		
 		TableLayout tl = (TableLayout) ((HomeMatrixPagerAdapter) pager
 				.getAdapter()).getmCurrentView();
 		if (tl != null)
 			mainlayout = tl;
 		
-
-		home.setOnClickListener(new OnClickListener() {
+		widgetLaunch.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -88,6 +90,18 @@ public class MainActivity extends Activity {
 					mainlayout = tl;
 				selectWidget();
 
+			}
+		});
+
+		home.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				Intent intent = new Intent(MainActivity.this,
+						AllAppsActivity.class);
+				startActivity(intent);
+				
 			}
 		});
 
