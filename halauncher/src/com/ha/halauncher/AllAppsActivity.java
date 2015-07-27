@@ -3,9 +3,9 @@ package com.ha.halauncher;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -140,4 +140,31 @@ public class AllAppsActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	@Override
+    protected void onStop() {
+		Log.e("ashish","onStop called");
+		 super.onStop();
+		finish();
+
+       
+    }
+	
+	@Override
+
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+	if(keyCode == KeyEvent.KEYCODE_HOME)
+	{
+	 Log.i("Home Button","Clicked");
+	 finish();
+	}
+	if(keyCode==KeyEvent.KEYCODE_BACK)
+	{
+
+	    finish();
+	 }
+	   return false;
+	};
+
 }

@@ -10,24 +10,22 @@ import android.appwidget.AppWidgetProviderInfo;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.TableLayout;
 import android.widget.ImageButton;
 import android.widget.Space;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
 import com.ha.halauncher.home.HomeMatrixPager;
 import com.ha.halauncher.home.HomeMatrixPagerAdapter;
+import com.ha.halauncher.home.TestLayout;
 
 /*
  *   It is the main activity 
@@ -49,7 +47,7 @@ public class MainActivity extends Activity {
 	AppWidgetManager mAppWidgetManager;
 	AppWidgetHost mAppWidgetHost;
 
-	TableLayout mainlayout;
+	TestLayout mainlayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +67,7 @@ public class MainActivity extends Activity {
 		ImageButton widgetLaunch = (ImageButton) findViewById(R.id.widgetLaunch);
 		
 		
-		TableLayout tl = (TableLayout) ((HomeMatrixPagerAdapter) pager
+		TestLayout tl =(TestLayout) ((HomeMatrixPagerAdapter) pager
 				.getAdapter()).getmCurrentView();
 		if (tl != null)
 			mainlayout = tl;
@@ -83,7 +81,7 @@ public class MainActivity extends Activity {
 						AllAppsActivity.class);
 				// startActivity(intent);
 				HomeMatrixPager pager = (HomeMatrixPager) findViewById(R.id.homepager);
-				TableLayout tl = (TableLayout) ((HomeMatrixPagerAdapter) pager
+				TestLayout tl = (TestLayout) ((HomeMatrixPagerAdapter) pager
 						.getAdapter()).getmCurrentView();
 
 				if (tl != null)

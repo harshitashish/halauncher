@@ -57,7 +57,7 @@ public class HomeMatrixPagerAdapter extends PagerAdapter {
 		ViewGroup rootView = (ViewGroup) mInflater.inflate(
 				R.layout.home_matrix_page, container, false);
 
-		TableLayout g = (TableLayout) rootView.findViewById(R.id.home_matrix);
+		TestLayout g = (TestLayout) rootView.findViewById(R.id.home_matrix);
 		
 
 		g.setOnTouchListener(new OnTouchListener() {

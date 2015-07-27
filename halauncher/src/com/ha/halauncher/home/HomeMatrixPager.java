@@ -39,7 +39,7 @@ public class HomeMatrixPager extends ViewPager {
 						.getAdapter()).getmCurrentView();
 
 				if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-					((TableLayout) currentView).dispatchTouchEvent(motionEvent);
+					((TestLayout) currentView).dispatchTouchEvent(motionEvent);
 					xdown = motionEvent.getX();
 					ydown = motionEvent.getY();
 					moved = false;
@@ -52,7 +52,7 @@ public class HomeMatrixPager extends ViewPager {
 
 						moved = true;
 					} else {
-						((TableLayout) currentView)
+						((TestLayout) currentView)
 								.dispatchTouchEvent(motionEvent);
 						// Log.e("Ashish", "new if");
 					}
@@ -60,7 +60,7 @@ public class HomeMatrixPager extends ViewPager {
 				if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
 					if (!moved) {
 						Log.e("Ashish", "Pager not moved OnClick");
-						((TableLayout) currentView)
+						((TestLayout) currentView)
 								.dispatchTouchEvent(motionEvent);
 
 					}
