@@ -12,15 +12,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.Space;
-import android.widget.TableLayout;
 import android.widget.Toast;
 
 import com.ha.halauncher.home.HomeMatrixPager;
@@ -51,6 +52,8 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+		Log.e(TAG, "OnCreatre");
 
 		super.onCreate(savedInstanceState);
 		currentApiVersion = android.os.Build.VERSION.SDK_INT;
@@ -98,6 +101,7 @@ public class MainActivity extends Activity {
 
 				Intent intent = new Intent(MainActivity.this,
 						AllAppsActivity.class);
+				
 				startActivity(intent);
 				
 			}
@@ -239,7 +243,7 @@ public class MainActivity extends Activity {
 			@Override
 			public boolean onLongClick(View v) {
 				// TODO Auto-generated method stub
-				Log.e("Ashish", "Host Long Clicked");
+				Log.e(TAG, "Host Long Clicked");
 				((AppWidgetHostView) v).updateAppWidgetSize(null,
 						v.getWidth() / 2, v.getHeight() / 2, v.getWidth() / 2,
 						v.getHeight() / 2);
@@ -270,14 +274,14 @@ public class MainActivity extends Activity {
 		float lyWidth = mainlayout.getWidth()
 				/ (displayMetrics.densityDpi / 160);
 
-		Log.e("Ashish", "densithy :: " + displayMetrics.densityDpi / 160);
+		Log.e(TAG, "densith:: " + displayMetrics.densityDpi / 160);
 
 		ig.numRow = (int) Math.ceil((height / 3) / (lyHeight / 4));
 		ig.numColumn = (int) Math.ceil((width / 3) / (lyWidth / 4));
 
-		Log.e("Ashish", "lyHeight :: " + lyHeight + "  lyWidth :: " + lyWidth);
+		Log.e(TAG, "lyHeight :: " + lyHeight + "  lyWidth :: " + lyWidth);
 
-		Log.e("Ashish", "rows :: " + ig.numRow + "  columns :: " + ig.numColumn);
+		Log.e(TAG, "rows :: " + ig.numRow + "  columns :: " + ig.numColumn);
 
 		return ig;
 	}
@@ -298,6 +302,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
+		Log.e(TAG, "OnStart");
 		mAppWidgetHost.startListening();
 	}
 
@@ -347,5 +352,94 @@ public class MainActivity extends Activity {
 		Toast.makeText(this, R.string.no_widgets_popup, Toast.LENGTH_SHORT)
 				.show();
 	}
+	
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
 
+		
+		Log.e(TAG," keydown");
+	if(keyCode == KeyEvent.KEYCODE_HOME)
+	{
+	 Log.i("Home Button","Clicked");
+	 //finish();
+	}
+	if(keyCode==KeyEvent.KEYCODE_BACK)
+	{
+
+	   // finish();
+	 }
+	   return false;
+	};
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		Log.e(TAG, "OnResume");
+		super.onResume();
+	}
+	
+	@Override
+	protected void onPause(){
+		Log.e(TAG, "OnPause");
+		super.onPause();
+		
+		
+	}
+
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		Log.e(TAG, "onRestart");
+		super.onRestart();
+	}
+
+	@Override
+	protected void onPostResume() {
+		// TODO Auto-generated method stub
+		Log.e(TAG, "onPostResume");
+		super.onPostResume();
+		
+		
+		
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		Log.e(TAG, "onNewIntent");
+		super.onNewIntent(intent);
+	}
+
+	@Override
+	protected void onUserLeaveHint() {
+		// TODO Auto-generated method stub
+		Log.e(TAG, "onUserLeaveHint");
+		super.onUserLeaveHint();
+	}
+
+	@Override
+	public void onVisibleBehindCanceled() {
+		// TODO Auto-generated method stub
+		Log.e(TAG, "onVisibleBehindCanceled");
+		super.onVisibleBehindCanceled();
+	}
+	
+	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		
+		savedInstanceState.putInt("ash", 1);
+	    // Save the user's current game state
+	    Log.e(TAG, "onSaveInstanceState");
+	    super.onSaveInstanceState(savedInstanceState);
+	}
+	
+	@Override
+	public void onRestoreInstanceState(Bundle savedInstanceState){
+	    // Save the user's current game state
+	    Log.e(TAG, "onRestoreInstanceState");
+	    super.onSaveInstanceState(savedInstanceState);
+	}
+	
 }
