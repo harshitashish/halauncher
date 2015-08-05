@@ -1,0 +1,25 @@
+<resources>
+
+<declare-styleable name="TestLayoutLP">
+    <attr name="android:layout_gravity" />
+    <attr name="layout_position">
+        <enum name="middle" value="0" />
+        <enum name="left" value="1" />
+        <enum name="right" value="2" />
+    </attr>
+    
+   <attr name="layout_row">
+        <enum name="value0" value="0" />
+        <enum name="value1" value="1" />
+        <enum name="value2" value="2" />
+        <enum name="value3" value="3" />
+    </attr>
+    <attr name="layout_column">
+        <enum name="value0" value="0" />
+        <enum name="value1" value="1" />
+        <enum name="value2" value="2" />
+        <enum name="value3" value="3" />
+    </attr>
+</declare-styleable>
+
+</resources>

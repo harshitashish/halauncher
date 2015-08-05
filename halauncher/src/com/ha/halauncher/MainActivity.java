@@ -8,10 +8,14 @@ import android.appwidget.AppWidgetHostView;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,8 +23,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.Toast;
 
@@ -258,8 +262,15 @@ public class MainActivity extends Activity {
 
 		s1.setLayoutParams(new LayoutParams(0, 0));
 		
-		mainlayout.addView(hostView);
+		
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+		mainlayout.addView(hostView,layoutParams);
+		
+		
 
+		//mainlayout.addView(hostView, new TestLayout.LayoutParams(this, ));
 		Log.i(TAG, "The widget size is: " + appWidgetInfo.minWidth + "*"
 				+ appWidgetInfo.minHeight);
 	}
@@ -311,6 +322,7 @@ public class MainActivity extends Activity {
 	 */
 	@Override
 	protected void onStop() {
+		Log.e(TAG, "OnStop");
 		super.onStop();
 		mAppWidgetHost.stopListening();
 	}
@@ -435,11 +447,57 @@ public class MainActivity extends Activity {
 	    super.onSaveInstanceState(savedInstanceState);
 	}
 	
+	
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState){
 	    // Save the user's current game state
 	    Log.e(TAG, "onRestoreInstanceState");
 	    super.onSaveInstanceState(savedInstanceState);
 	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState,
+			PersistableBundle persistentState) {
+		// TODO Auto-generated method stub
+		Log.e(TAG, "onCreate");
+		super.onCreate(savedInstanceState, persistentState);
+	}
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		Log.e(TAG, "onDestroy");
+		super.onDestroy();
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		// TODO Auto-generated method stub
+		Log.e(TAG, "onConfigurationChanged");
+		super.onConfigurationChanged(newConfig);
+	}
+
+	@Override
+	public void onContentChanged() {
+		// TODO Auto-generated method stub
+		Log.e(TAG, "onContentChanged");
+		super.onContentChanged();
+	}
+
+	@Override
+	public void onAttachedToWindow() {
+		// TODO Auto-generated method stub
+		Log.e(TAG, "onAttachedToWindow");
+		super.onAttachedToWindow();
+	}
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		// TODO Auto-generated method stub
+		super.onCreateContextMenu(menu, v, menuInfo);
+	}
+	
+	
 	
 }
