@@ -7,12 +7,12 @@ import android.appwidget.AppWidgetHost;
 import android.appwidget.AppWidgetHostView;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -22,15 +22,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.Toast;
 
+import com.ha.halauncher.home.DefaultLayout;
 import com.ha.halauncher.home.HomeMatrixPager;
 import com.ha.halauncher.home.HomeMatrixPagerAdapter;
-import com.ha.halauncher.home.TestLayout;
+import com.ha.halauncher.model.DBModel;
+import com.ha.halauncher.model.Widget;
 
 /*
  *   It is the main activity 
@@ -52,12 +55,18 @@ public class MainActivity extends Activity {
 	AppWidgetManager mAppWidgetManager;
 	AppWidgetHost mAppWidgetHost;
 
-	TestLayout mainlayout;
-
+	DefaultLayout mainlayout;
+	
+	DBModel db;
+	private int appWidgetId;
+	private AppWidgetHostView hostView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		Log.e(TAG, "OnCreatre");
+		
+		db = new DBModel(this);
+
 
 		super.onCreate(savedInstanceState);
 		currentApiVersion = android.os.Build.VERSION.SDK_INT;
@@ -74,7 +83,7 @@ public class MainActivity extends Activity {
 		ImageButton widgetLaunch = (ImageButton) findViewById(R.id.widgetLaunch);
 		
 		
-		TestLayout tl =(TestLayout) ((HomeMatrixPagerAdapter) pager
+		DefaultLayout tl =(DefaultLayout) ((HomeMatrixPagerAdapter) pager
 				.getAdapter()).getmCurrentView();
 		if (tl != null)
 			mainlayout = tl;
@@ -88,7 +97,7 @@ public class MainActivity extends Activity {
 						AllAppsActivity.class);
 				// startActivity(intent);
 				HomeMatrixPager pager = (HomeMatrixPager) findViewById(R.id.homepager);
-				TestLayout tl = (TestLayout) ((HomeMatrixPagerAdapter) pager
+				DefaultLayout tl = (DefaultLayout) ((HomeMatrixPagerAdapter) pager
 						.getAdapter()).getmCurrentView();
 
 				if (tl != null)
@@ -217,31 +226,31 @@ public class MainActivity extends Activity {
 	 */
 	public void createWidget(Intent data) {
 		Bundle extras = data.getExtras();
-		int appWidgetId = extras
+		appWidgetId = extras
 				.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
 		AppWidgetProviderInfo appWidgetInfo = mAppWidgetManager
 				.getAppWidgetInfo(appWidgetId);
 
-		AppWidgetHostView hostView = mAppWidgetHost.createView(this,
+		 hostView = mAppWidgetHost.createView(this,
 				appWidgetId, appWidgetInfo);
 
 		hostView.setAppWidget(appWidgetId, appWidgetInfo);
 
-		ItemGrid ig = positionInLayout(appWidgetInfo.minWidth,
-				appWidgetInfo.minHeight);
+	//	ItemGrid ig = positionInLayout(appWidgetInfo.minWidth,
+	//			appWidgetInfo.minHeight);
 
 		// hostView.setMinimumHeight(appWidgetInfo);
 		// hostView.setMinimumWidth(appWidgetInfo);
 
-		DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+	/*	DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
 
 		float lyHeight = mainlayout.getHeight()
 				/ (displayMetrics.densityDpi / 160);
 		float lyWidth = mainlayout.getWidth()
 				/ (displayMetrics.densityDpi / 160);
-
-		hostView.updateAppWidgetSize(null, appWidgetInfo.minWidth / 2,
-				appWidgetInfo.minHeight / 2, 0, 0);
+*/
+		hostView.updateAppWidgetSize(null, appWidgetInfo.minWidth ,
+				appWidgetInfo.minHeight, 0, 0);
 		hostView.setOnLongClickListener(new OnLongClickListener() {
 
 			@Override
@@ -263,49 +272,48 @@ public class MainActivity extends Activity {
 		s1.setLayoutParams(new LayoutParams(0, 0));
 		
 		
-		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-		mainlayout.addView(hostView,layoutParams);
+		//DefaultLayout.LayoutParams layoutParams = mainlayout.generateDefaultLayoutParams();
 		
+		/*layoutParams.row = 0;
+		layoutParams.column = 0; 
 		
-
-		//mainlayout.addView(hostView, new TestLayout.LayoutParams(this, ));
+		db.addWidget(new Widget(appWidgetId, layoutParams.row, layoutParams.column ));
+		mainlayout.addView(hostView,layoutParams);*/
+		
+		InputDialoge d = new InputDialoge();
+		d.setListener(new InputListener() {
+			
+			@Override
+			public void onDialogPositiveClick(InputDialoge dialog) {
+				// TODO Auto-generated method stub
+				
+				DefaultLayout.LayoutParams layoutParams = mainlayout.generateDefaultLayoutParams();
+				
+				//EditText r = dialog.findViewbyId()
+				
+				layoutParams.row = Integer.parseInt(((EditText)(dialog.getDialog()).findViewById(R.id.topx)).getEditableText().toString());
+				layoutParams.column = Integer.parseInt(((EditText)(dialog.getDialog()).findViewById(R.id.topy)).getEditableText().toString());
+				
+				db.addWidget(new Widget(appWidgetId, layoutParams.row, layoutParams.column ));
+				mainlayout.addView(hostView,layoutParams);
+				
+			}
+			
+			@Override
+			public void onDialogNegativeClick(InputDialoge dialog) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+        d.show(this.getFragmentManager(),"Input");
+		//mainlayout.addView(hostView, new DefaultLayout.LayoutParams(this, ));
 		Log.i(TAG, "The widget size is: " + appWidgetInfo.minWidth + "*"
 				+ appWidgetInfo.minHeight);
 	}
-
-	private ItemGrid positionInLayout(int width, int height) {
-		ItemGrid ig = new ItemGrid();
-
-		DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-
-		float lyHeight = mainlayout.getHeight()
-				/ (displayMetrics.densityDpi / 160);
-		float lyWidth = mainlayout.getWidth()
-				/ (displayMetrics.densityDpi / 160);
-
-		Log.e(TAG, "densith:: " + displayMetrics.densityDpi / 160);
-
-		ig.numRow = (int) Math.ceil((height / 3) / (lyHeight / 4));
-		ig.numColumn = (int) Math.ceil((width / 3) / (lyWidth / 4));
-
-		Log.e(TAG, "lyHeight :: " + lyHeight + "  lyWidth :: " + lyWidth);
-
-		Log.e(TAG, "rows :: " + ig.numRow + "  columns :: " + ig.numColumn);
-
-		return ig;
-	}
-
-	private class ItemGrid {
-
-		int numRow;
-		int numColumn;
-		int startRow;
-		int startColumn;
-
-	}
-
+	
+	
+	
 	/**
 	 * Registers the AppWidgetHost to listen for updates to any widgets this app
 	 * has.
